@@ -43,8 +43,8 @@ PROJECT_FOLDER
 │     └──[java]      
 │     └──[resources]
 │        │  application.properties #contains springboot cofigurations
-│        │  schema.sql  # Contains DB Script to create tables that executes during the App Startup          
-│        │  data.sql    # Contains DB Script to Insert data that executes during the App Startup (after schema.sql)
+│        │  schema-h2.sql  # Contains DB Script to create tables that executes during the App Startup          
+│        │  data-h2.sql    # Contains DB Script to Insert data that executes during the App Startup (after schema-h2.sql)
 │        └──[public]    # keep all html,css etc, resources that needs to be exposed to user without security
 │
 └──[target]              #Java build files, auto-created after running java build: mvn install
@@ -99,7 +99,7 @@ The goal of the project is to
 I have included an in-memory database for the application. Database schema and sample data for the app is created everytime the app starts, and gets destroyed after the app stops, so the changes made to to the database are persistent only as long as the app is running
 <br/>
 Creation of database schema and data are done using sql scripts that Springs runs automatically. 
-To modify the database schema or the data you can modify [schema.sql](./src/main/resources/schema.sql) and [data.sql](./src/main/resources/data.sql) which can be found at `/src/main/resources`
+To modify the database schema or the data you can modify [schema-h2.sql](./src/main/resources/schema-h2.sql) and [data-h2.sql](./src/main/resources/data-h2.sql) which can be found at `/src/main/resources`
 
 ## Spring security
 Security is **enabled** by default, to disable, you must comment [this line](./src/main/java/com/app/config/SecurityConfig.java#L15) in `src/main/java/com/config/SecurityConfig.java`<br/>
@@ -108,7 +108,7 @@ When security is enabled, none of the REST API will be accessesble directly.
 To test security access `http://localhost:9119/version` API and you should get a forbidden/Access denied error. 
 In order to access these secured API you must first obtain a token. Tokens can be obtained by passing a valid userid/password
 
-userid and password are stored in H2 database. To add/remove users, modify the [data.sql](./src/main/resources/data.sql#L3)
+userid and password are stored in H2 database. To add/remove users, modify the [data-h2.sql](./src/main/resources/data-h2.sql#L3)
 couple of valid users and their passwords are `demo\demo` and `admin\admin`
 <br/>
 
